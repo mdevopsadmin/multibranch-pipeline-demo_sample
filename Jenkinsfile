@@ -32,33 +32,31 @@ pipeline {
             }
         }
 
-        stage(' Unit Testing') {
+        stage(' Code Analysis') {
             steps {
-              
+              bat 'mvn sonar:sonar \
+                       -Dsonar.projectKey=abcd \
+                       -Dsonar.host.url=http://localhost:9003 \
+                       -Dsonar.login=97df365415abb7c63a5038a2cbe49bd00ed0335d''
                 echo "Running Unit Tests"
                 
             }
         }
 
-        stage('Code Analysis') {
+        stage('Unit Testing') {
             steps {
-                
+                bat 'mvn clean test'
                 echo "Running Code Analysis"
                 
             }
         }
 
-        stage('Build Deploy Code') {
-            when {
-                branch 'develop'
-            }
+        stage('Package Code') {
+            
             steps {
+                bat 'mvn clean install package'
                 
                 echo "Building Artifact"
-               
-
-                
-                echo "Deploying Code"
                 
             }
         }
