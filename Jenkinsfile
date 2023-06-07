@@ -35,7 +35,7 @@ pipeline {
         stage(' Code Analysis') {
             steps {
               echo "Running Code Analysis"
-              bat 'mvn sonar:sonar -Dsonar.projectKey="abcd" -Dsonar.host.url="http://localhost:9003" -Dsonar.login="97df365415abb7c63a5038a2cbe49bd00ed0335d"'
+              bat 'mvn sonar:sonar -Dsonar.projectKey="abcd" -Dsonar.login="97df365415abb7c63a5038a2cbe49bd00ed0335d"'
                 
                 
             }
