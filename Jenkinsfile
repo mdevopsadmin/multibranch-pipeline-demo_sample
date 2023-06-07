@@ -18,9 +18,9 @@ pipeline {
         stage('Cleanup Workspace') {
             steps {
                 cleanWs()
-                sh """
+                
                 echo "Cleaned Up Workspace For Project"
-                """
+                
             }
         }
 
@@ -29,24 +29,24 @@ pipeline {
                 checkout([
                     $class: 'GitSCM', 
                     branches: [[name: '*/main']], 
-                    userRemoteConfigs: [[url: 'https://github.com/mdevopsadmin/Bookstore_1.git']]
+                    userRemoteConfigs: [[url: 'https://github.com/mdevopsadmin/NETFrameworkSample.git']]
                 ])
             }
         }
 
         stage(' Unit Testing') {
             steps {
-                sh """
+                
                 echo "Running Unit Tests"
-                """
+               
             }
         }
 
         stage('Code Analysis') {
             steps {
-                sh """
+               
                 echo "Running Code Analysis"
-                """
+              
             }
         }
 
@@ -55,13 +55,13 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                sh """
+                
                 echo "Building Artifact"
-                """
+               
 
-                sh """
+             
                 echo "Deploying Code"
-                """
+               
             }
         }
 
