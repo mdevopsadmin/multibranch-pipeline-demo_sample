@@ -34,19 +34,18 @@ pipeline {
 
         stage(' Code Analysis') {
             steps {
-              bat 'mvn sonar:sonar \
-                       -Dsonar.projectKey=abcd \
-                       -Dsonar.host.url=http://localhost:9003 \
-                       -Dsonar.login="97df365415abb7c63a5038a2cbe49bd00ed0335d"'
-                echo "Running Unit Tests"
+              echo "Running Code Analysis"
+              bat 'mvn sonar:sonar -Dsonar.projectKey="abcd" -Dsonar.host.url="http://localhost:9003" -Dsonar.login="97df365415abb7c63a5038a2cbe49bd00ed0335d"'
+                
                 
             }
         }
 
         stage('Unit Testing') {
             steps {
+                echo "Running Unit Tests"
                 bat 'mvn clean test'
-                echo "Running Code Analysis"
+                
                 
             }
         }
