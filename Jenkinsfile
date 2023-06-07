@@ -47,16 +47,16 @@ pipeline {
         stage(' Package Update') {
             steps {
                 
-                echo "Running Unit Tests"
-               bat '.paket/paket.exe update'
+                echo "paket update"
+               bat '".paket/paket.exe" update'
             }
         }
            
-        stage(' Package Restore') {
+        stage(' Paket Restore') {
             steps {
                 
-                echo "Running Unit Tests"
-               bat '.paket/paket.exe restore'
+                echo "paket restore"
+               bat '".paket/paket.exe" restore'
             }
         }
         
