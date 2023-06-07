@@ -69,7 +69,7 @@ pipeline {
                 
                 echo "Building Artifact"
                
-            bat 'MsBuild.exe PaketBindingRedirects.sln /t:rebuild'
+            bat 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\MsBuild.exe PaketBindingRedirects.sln /t:rebuild'
              
                 echo "Deploying Code"
                
