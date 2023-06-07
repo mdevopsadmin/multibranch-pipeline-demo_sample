@@ -2,7 +2,7 @@ pipeline {
 
     agent {
         node {
-            label 'master'
+            label 'node1'
         }
     }
 
@@ -34,31 +34,42 @@ pipeline {
             }
         }
 
-        stage(' Unit Testing') {
-            steps {
-                
-                echo "Running Unit Tests"
-               
-            }
-        }
-
-        stage('Code Analysis') {
+         stage('Code Analysis') {
             steps {
                
                 echo "Running Code Analysis"
-              
+              bat 'SonarScanner.MSBuild.exe begin /k:"NET_PROJECT_SONAR_PIPELINE" /d:sonar.host.url="http://localhost:9003" /d:sonar.login="6412c4b1ca12e92b5302cbd8b97e9644781e9174"'
+            bat 'MsBuild.exe /t:Rebuild'
+                SonarScanner.MSBuild.exe end /d:sonar.login="6412c4b1ca12e92b5302cbd8b97e9644781e9174"
             }
         }
+        
+        stage(' Package Update') {
+            steps {
+                
+                echo "Running Unit Tests"
+               bat '.paket/paket.exe update'
+            }
+        }
+           
+        stage(' Package Restore') {
+            steps {
+                
+                echo "Running Unit Tests"
+               bat '.paket/paket.exe restore'
+            }
+        }
+        
+
+       
 
         stage('Build Deploy Code') {
-            when {
-                branch 'develop'
-            }
+            
             steps {
                 
                 echo "Building Artifact"
                
-
+            bat 'MsBuild.exe PaketBindingRedirects.sln /t:rebuild'
              
                 echo "Deploying Code"
                
