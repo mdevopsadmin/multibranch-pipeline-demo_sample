@@ -39,8 +39,8 @@ pipeline {
                
                 echo "Running Code Analysis"
               bat 'SonarScanner.MSBuild.exe begin /k:"NET_PROJECT_SONAR_PIPELINE" /d:sonar.host.url="http://localhost:9003" /d:sonar.login="6412c4b1ca12e92b5302cbd8b97e9644781e9174"'
-            bat 'MsBuild.exe /t:Rebuild'
-                SonarScanner.MSBuild.exe end /d:sonar.login="6412c4b1ca12e92b5302cbd8b97e9644781e9174"
+              bat 'MsBuild.exe /t:Rebuild'
+              bat 'SonarScanner.MSBuild.exe end /d:sonar.login="6412c4b1ca12e92b5302cbd8b97e9644781e9174"'
             }
         }
         
